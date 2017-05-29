@@ -82,7 +82,7 @@ class Search extends React.Component {
   render () {
     if(!Object.keys(this.state).length) return <Loader />;
 
-    return (<div>
+    return (<section>
       <h1>Movie DB search</h1>
       {/* The Search form */}
       <SearchForm submit={this.onSubmit}
@@ -94,7 +94,7 @@ class Search extends React.Component {
 
       {/* The Search results will be displayed here */}
       <Results  {...this.state}/>
-    </div>)
+    </section>)
   }
 }
 

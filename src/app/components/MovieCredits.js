@@ -49,27 +49,27 @@ class MovieCredits extends React.Component {
     var {cast, crew} = this.state;
     return (
       <section>
-      <h1>Movie credits</h1>
-      <h2>Cast</h2>
-      <ul className="cast-list">
-      {cast.map(({character, name, id}) =>
-          <li key={`${id}-${name}-${character}`}>
-            {character} :
-            <Link to={`/person/details/${id}`}>
-              {name}
-            </Link>
+        <h1>Movie credits</h1>
+        <h2>Cast</h2>
+        <ul className="cast-list">
+        {cast.map(({character, name, id}) =>
+            <li key={`${id}-${name}-${character}`}>
+              {character} :
+              <Link to={`/person/details/${id}`}>
+                {name}
+              </Link>
 
-          </li>
-      )}
-      </ul>
-      <h2>Crew Members</h2>
-      <ul className="crew-list">
-      {crew.map(({job, name, id}) =>
-          <li key={`${id}-${name}-${job}`}>
-            {name} : {job}
-          </li>
-      )}
-      </ul>
+            </li>
+        )}
+        </ul>
+        <h2>Crew Members</h2>
+        <ul className="crew-list">
+        {crew.map(({job, name, id}) =>
+            <li key={`${id}-${name}-${job}`}>
+              {name} : {job}
+            </li>
+        )}
+        </ul>
       </section>
     )
   }

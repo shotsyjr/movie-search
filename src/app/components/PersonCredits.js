@@ -47,29 +47,29 @@ class PersonCredits extends React.Component {
     var {cast, crew} = this.state;
     return (
       <section>
-      <h1>Movie credits</h1>
-      {!!cast.length ?<h2>Cast</h2> : null }
-      <ul className="cast-list">
-      {cast.map(({character, title, id}) =>
-          <li key={`${id}-${title}-${character}`}>
-            {character} :
-            <Link to={`/movie/details/${id}`}>
-              {title}
-            </Link>
-          </li>
-      )}
-      </ul>
-      {!!crew.length ? <h2>Crew</h2> : null }
-      <ul className="crew-list">
-      {crew.map(({job, title, id}) =>
-          <li key={`${id}-${title}-${job}`}>
-            <Link to={`/movie/details/${id}`}>
-              {title}
-            </Link>
-            : {job}
-          </li>
-      )}
-      </ul>
+        <h1>Movie credits</h1>
+        {!!cast.length ?<h2>Cast</h2> : null }
+        <ul className="cast-list">
+        {cast.map(({character, title, id}) =>
+            <li key={`${id}-${title}-${character}`}>
+              {character} :
+              <Link to={`/movie/details/${id}`}>
+                {title}
+              </Link>
+            </li>
+        )}
+        </ul>
+        {!!crew.length ? <h2>Crew</h2> : null }
+        <ul className="crew-list">
+        {crew.map(({job, title, id}) =>
+            <li key={`${id}-${title}-${job}`}>
+              <Link to={`/movie/details/${id}`}>
+                {title}
+              </Link>
+              : {job}
+            </li>
+        )}
+        </ul>
       </section>
     )
   }
