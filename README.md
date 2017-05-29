@@ -4,6 +4,8 @@
 # install packages
 npm install
 # start app
-npm run dev
+npm run build
+# navigate to
+http://localhost:8080
 # run tests
 npm test
