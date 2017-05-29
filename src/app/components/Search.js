@@ -1,4 +1,7 @@
 import React from 'react';
+import SearchForm from './SearchForm';
+import Results from './Results';
+import Loader from './Loader';
 
 /**
   * apiKey used for fetching data from the movie database
@@ -45,8 +48,6 @@ class Search extends React.Component {
   /**
  * queryMovieDB function fetches data from the movie database and sets the new state, then saves the new state in localStorage
  * @param   {string} url    the url to fetch data from
- * @param   {boolean} userSearch    boolean stating whether this search was initiated by a user using the search form
- * @param   {string} resultsType    the type of results we are expect - for state purpose
  */
   queryMovieDB (url) {
     fetch(url)
@@ -79,35 +80,20 @@ class Search extends React.Component {
  * @return {ReactComponent}
  */
   render () {
-    // TODO: replace with loading component
-    if(!Object.keys(this.state).length) return (<div className="loader" aria-live='polite'>
-      Loading...
-    </div>);
+    // return Loader if the state is empty
+    if(!Object.keys(this.state).length) return <Loader />;
 
     return (<div>
       <h1>Movie DB search</h1>
-      {/* The Search form - TODO: pull out into its own component*/}
-      <form name="search-form" onSubmit={this.onSubmit}>
-        <fieldset className="form-group">
-          <label htmlFor="query">
-            Enter your search query:
-          </label>
-          <input type="text"
-              name="query"
-              ref={el => this.inputElement = el}
-              className="form-control" />
-        </fieldset>
-        <input type="submit" value="Submit" name="submit-button" className="btn btn-primary" />
-      </form>
+      {/* The Search form */}
+      <SearchForm submit={this.onSubmit}
+        inputRef={el => this.inputElement = el}
+      />
       {/* Search form validation */}
       {this.state.searchFailed ? <p className="alert alert-warning" role="alert">Please enter text to search</p> : null }
 
       {/* The Search results will be displayed here */}
-      <ul className="movies" >
-        {this.state.results.map(result =>
-          <li key={result.id}>{result.id} - {result.title}</li>
-        )}
-      </ul>
+      <Results  {...this.state}/>
     </div>)
   }
 }
