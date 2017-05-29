@@ -19,6 +19,16 @@ class SearchForm extends React.Component {
             name="query"
             ref={this.props.inputRef}
             className="form-control" />
+        <label htmlFor="type">
+          Enter your search type:
+        </label>
+        <select
+            name="type"
+            ref={this.props.selectRef}
+            className="form-control" >
+          <option value="movie">Movies</option>
+          <option value="person">People</option>
+        </select>
       </fieldset>
       <input type="submit" value="Submit" name="submit-button" className="btn btn-primary" />
     </form>)

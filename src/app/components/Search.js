@@ -2,6 +2,7 @@ import React from 'react';
 import SearchForm from './SearchForm';
 import Results from './Results';
 import Loader from './Loader';
+import {getItemFromLocalStorage, setItemInLocalStorage, fetchData} from './Store';
 
 /**
   * apiKey used for fetching data from the movie database
@@ -33,8 +34,7 @@ class Search extends React.Component {
  */
   constructor (props) {
     super(props);
-    var item = localStorage.getItem("movies");
-    this.state = JSON.parse(item) || {};
+    this.state = getItemFromLocalStorage('movies');
   }
   /**
  * componentDidMount function
@@ -48,13 +48,13 @@ class Search extends React.Component {
   /**
  * queryMovieDB function fetches data from the movie database and sets the new state, then saves the new state in localStorage
  * @param   {string} url    the url to fetch data from
+ * @param   {boolean} userSearch    boolean stating whether this search was initiated by a user using the search form
+ * @param   {string} resultsType    the type of results we are expect - for state purpose
  */
-  queryMovieDB (url) {
-    fetch(url)
-      .then(data => data.json())
-      .then(({results}) => this.setState({results, searchFailed: this.searchFailed}))
-      .then(() => localStorage.setItem('movies', JSON.stringify(this.state)))
-      .catch(error => console.log(error))
+  queryMovieDB (url, userSearch, resultsType) {
+    fetchData(url)
+    .then(({results}) => this.setState({results, userSearch, resultsType, searchFailed: this.searchFailed}))
+    .then(() => setItemInLocalStorage('movies', this.state));
   }
   /**
  * onSubmit function handles the submit event from the search form.
@@ -65,10 +65,10 @@ class Search extends React.Component {
     if(e) e.preventDefault();
     let inputQuery = this.inputElement.value;
 
-    // if there's no input the search will fail
     if (!!inputQuery) {
       this.searchFailed = false;
-      this.queryMovieDB(queryURL + "movie" + "?api_key=" +apiKey + "&query=" + inputQuery.split(' ').join('+') )
+      let selectValue = this.selectElement.value;
+      this.queryMovieDB(queryURL + selectValue + "?api_key=" +apiKey + "&query=" + inputQuery.split(' ').join('+'), true, selectValue )
     } else {
       this.setState({searchFailed: true});
     }
@@ -80,7 +80,6 @@ class Search extends React.Component {
  * @return {ReactComponent}
  */
   render () {
-    // return Loader if the state is empty
     if(!Object.keys(this.state).length) return <Loader />;
 
     return (<div>
@@ -88,6 +87,7 @@ class Search extends React.Component {
       {/* The Search form */}
       <SearchForm submit={this.onSubmit}
         inputRef={el => this.inputElement = el}
+        selectRef={el => this.selectElement = el}
       />
       {/* Search form validation */}
       {this.state.searchFailed ? <p className="alert alert-warning" role="alert">Please enter text to search</p> : null }
