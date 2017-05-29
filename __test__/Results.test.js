@@ -8,6 +8,9 @@ import movies from './mock-data/movies';
 let peopleResults = people.results;
 let movieResults = movies.results;
 
+// supressing Link
+jest.mock('react-router-dom');
+
 test('Results component renders for movies - no results', () => {
   let testData = {
     results: [],
