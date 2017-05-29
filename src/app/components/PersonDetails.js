@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Loader from './Loader';
 import {getItemFromLocalStorage, setItemInLocalStorage, fetchData} from './Store';
 
@@ -37,7 +38,8 @@ class PersonDetails extends React.Component {
  * render function - if the state is empty it returns "Loader" component,
  * otherwise it return the stateful represent state of the element
  * in the form of details of the person retrieved from the database
- * including an image for the person, name, birthday, place of birth, deathday, gender, and biography (if they are available)
+ * including an image for the person, name, birthday, place of birth, deathday,
+ * gender, biography, (if they are available) and a link to movie credits
  * @return {ReactComponent}
  */
   render () {
@@ -53,6 +55,9 @@ class PersonDetails extends React.Component {
         {!!deathday ? <p>Died: {deathday}</p> : null }
         <p>Gender: {gender !== 1 ? "Male" : "Female"}</p>
         {!!biography ? <p>{biography}</p> : null }
+        <Link to={`/person/credits/${id}`}>
+          Movie credits
+        </Link>
       </section>
     )
   }

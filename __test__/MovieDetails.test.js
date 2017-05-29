@@ -5,6 +5,9 @@ import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import movie from './mock-data/movie';
 
+// suppressing Link
+jest.mock('react-router-dom');
+
 jest.mock('../src/app/components/Store', () => {
   return ({
     getItemFromLocalStorage: jest.fn(() => { return  {}}),

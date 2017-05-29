@@ -1,9 +1,9 @@
 import React from 'react';
-import PersonDetails from '../src/app/components/PersonDetails';
+import MovieCredits from '../src/app/components/MovieCredits';
 import * as Store from '../src/app/components/Store';
 import { mount } from 'enzyme';
 import renderer from 'react-test-renderer';
-import person from './mock-data/person';
+import credits from './mock-data/movieCredits';
 
 // suppressing Link
 jest.mock('react-router-dom');
@@ -16,42 +16,43 @@ jest.mock('../src/app/components/Store', () => {
   });
 })
 
-test('PersonDetails component renders', () => {
+test('MovieCredits component renders', () => {
   const getItemFromLocalStorageSpy = jest.spyOn(Store, 'getItemFromLocalStorage');
   const fetchDataSpy = jest.spyOn(Store, 'fetchData');
 
   const wrapper = mount(
-    <PersonDetails match={{"params": { "id": person.id }}}/>
+    <MovieCredits match={{"params": { "id": 1 }}}/>
   );
 
   expect(getItemFromLocalStorageSpy).toHaveBeenCalled();
   expect(fetchDataSpy).toHaveBeenCalled();
 });
 
-test('PersonDetails component renders with data', () => {
+test('MovieCredits component renders with data', () => {
   const wrapper = mount(
-    <PersonDetails match={{"params": { "id": person.id }}}/>
+    <MovieCredits match={{"params": { "id": 1 }}}/>
   );
   expect(wrapper.find('section h1').length).toBe(0);
-  expect(wrapper.find('section img').length).toBe(0);
 
-  wrapper.instance().setState(person);
+  wrapper.instance().setState(credits);
 
   wrapper.update();
 
-  expect(wrapper.state()).toEqual(person);
+  expect(wrapper.state()).toEqual(credits);
   expect(wrapper.find('section h1').length).toBe(1);
-  expect(wrapper.find('section h1').text()).toBe("Marlon Brando");
-  expect(wrapper.find('section img').length).toBe(1);
-  expect(wrapper.find('section img').node.getAttribute('alt')).toBe("Image of Marlon Brando");
-  expect(wrapper.find('section img').node.getAttribute('src')).toBe("https://image.tmdb.org/t/p/w500//e2u2Vyy66j2rUL8fyjjHWlYtWLH.jpg");
+  expect(wrapper.find('section h1').text()).toBe("Movie credits");
+  expect(wrapper.find('section h2').length).toBe(2);
+  expect(wrapper.find('section h2').at(0).text()).toBe("Cast");
+  expect(wrapper.find('section h2').at(1).text()).toBe("Crew Members");
+  expect(wrapper.find('.cast-list li').length).toBe(22);
+  expect(wrapper.find('.crew-list li').length).toBe(11);
 });
 
 
 describe('PersonDetails component renders', () => {
   it('renders correctly', () => {
     const rendered = renderer.create(
-      <PersonDetails match={{"params": { "id": person.id }}}/>
+      <MovieCredits match={{"params": { "id": 1 }}}/>
     );
 
     expect(rendered.toJSON()).toMatchSnapshot();

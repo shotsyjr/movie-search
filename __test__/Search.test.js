@@ -10,7 +10,7 @@ let mockData = {
   resultsType: "movie",
   userSearch: false
 }
-// supressing Link
+// suppressing Link
 jest.mock('react-router-dom');
 
 jest.mock('../src/app/components/Store', () => {

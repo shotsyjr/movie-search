@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Loader from './Loader';
 import {getItemFromLocalStorage, setItemInLocalStorage, fetchData} from './Store';
 
@@ -37,7 +38,7 @@ class MovieDetails extends React.Component {
  * render function - if the state is empty it returns "Loader" component,
  * otherwise it return the stateful represent state of the element
  * in the form of details of the movie retrieved from the database
- * including an image for the movie, title and overview
+ * including an image for the movie, title, overview and a link to movie credits
  * @return {ReactComponent}
  */
   render () {
@@ -49,6 +50,9 @@ class MovieDetails extends React.Component {
         <h1>{title}</h1>
         <img alt={`Poster for ${title} movie`} src={`https://image.tmdb.org/t/p/w500/${poster_path}`} />
         <p>Overview: {overview}</p>
+        <Link to={`/movie/credits/${id}`}>
+          Movie credits
+        </Link>
       </section>
     )
   }
