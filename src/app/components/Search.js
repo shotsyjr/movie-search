@@ -83,7 +83,7 @@ class Search extends React.Component {
     if(!Object.keys(this.state).length) return <Loader />;
 
     return (<section>
-      <h1>Movie DB search</h1>
+      <h1>The Movie Database Search</h1>
       {/* The Search form */}
       <SearchForm submit={this.onSubmit}
         inputRef={el => this.inputElement = el}

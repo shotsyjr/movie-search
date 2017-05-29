@@ -1,40 +1,52 @@
 body {
-  background-color: #082213;
-  color: #d0d0d0;
+    background-color: #082213;
+    color: #d0d0d0;
 }
-  a, a:hover, a:focus {
+header {
+    background: white;
+    padding: 10px 20px;
+}
+a,
+a:hover,
+a:focus {
     color: white;
-  }
-  .movie-list,
-  .person-list {
+}
+.home-link,
+.home-link:hover,
+.home-link:focus {
+    color: black;
+    font-size: 18px;
+}
+.movie-list,
+.person-list {
     padding-left: 0;
     list-style: none;
-  }
-  .movie-list__item,
-  .person-list__item {
+}
+.movie-list__item,
+.person-list__item {
     margin-bottom: 10px;
     margin-right: 10px;
-  }
-  a.person-list__item__link,
-  a.movie-list__item__link {
+}
+a.person-list__item__link,
+a.movie-list__item__link {
     padding: 10px;
     display: flex;
     border-radius: 20px;
     border: 1px solid white;
-  }
-  a.movie-list__item__link {
+}
+a.movie-list__item__link {
     background-color: #64a0e0;
     color: #0e0e0e;
-  }
-  a.person-list__item__link {
+}
+a.person-list__item__link {
     background-color: #64e090;
     color: #003d53;
-  }
-  a.movie-list__item__link:hover,
-  a.movie-list__item__link:focus,
-  a.person-list__item__link:hover,
-  a.person-list__item__link:focus {
+}
+a.movie-list__item__link:hover,
+a.movie-list__item__link:focus,
+a.person-list__item__link:hover,
+a.person-list__item__link:focus {
     background-color: white;
     text-decoration: none;
     font-weight: bold;
-  }
+}

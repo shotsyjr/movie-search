@@ -17,9 +17,11 @@ class App extends React.Component {
 */
 render(<HashRouter>
   <main>
-    <Link className="home-link" to={`/`}>
-      Home
-    </Link>
+    <header>
+      <Link className="home-link" to={`/`}>
+        Home
+      </Link>
+    </header>
     <App />
   </main>
   </HashRouter>,
