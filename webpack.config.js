@@ -1,10 +1,11 @@
-var webpack = require('webpack');
-var path = require('path');
+const webpack = require('webpack');
+const path = require('path');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
-var BUILD_DIR = path.resolve(__dirname, 'src/public');
-var APP_DIR = path.resolve(__dirname, 'src/app');
+const BUILD_DIR = path.resolve(__dirname, 'src/public');
+const APP_DIR = path.resolve(__dirname, 'src/app');
 
-var config = {
+const config = {
   entry: APP_DIR + '/index.js',
   output: {
     path: BUILD_DIR,
@@ -18,7 +19,12 @@ var config = {
         loader : 'babel-loader'
       }
     ]
-  }
+  },
+  plugins: [
+    new UglifyJSPlugin({
+      comments: false
+    })
+  ]
 };
 
 module.exports = config;
